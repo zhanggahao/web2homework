@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>animate</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.box{
+			width: 100px;
+			height: 100px;
+			background-color: #f00;
+			position: absolute;			
+			left: 0px;
+		}
+	</style>
+</head>
+<body>
+	<div id="box" class="box"></div>
+</body>
+<script type="text/javascript">
+	function getStyle(obj,style) {  
+		if(obj.currentStyle) 
+		{  
+		    return obj.currentStyle[style];  
+		} 
+		else 
+		{  
+		    return getComputedStyle(obj)[style];  
+		}  
+	}
+	var box=document.getElementById("box");
+	box.onclick=function(){
+		var timer=setInterval(function(){
+			var now=parseInt(getStyle(box,"left"));
+			if(now ==500){
+				clearInterval(timer);
+			}
+			else{
+			box.style.left=now+100+"px";
+		}
+		}, 50)
+	}
+</script>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> 实现可折叠页面 </title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+      	*{
+      		font-size:24px;
+      	}
+	  	#Content1{
+	   	 	background-color:lightblue;
+			color:white;
+			font-weight:bold; 
+			padding:10px;
+	  	}
+	  	#collapseDiv{
+	    	background-color:blue;
+			color:white;
+			font-weight:bold;
+			padding:10px;
+			cursor:pointer;
+	  	}
+	  	#Content2{
+	    	border:3px solid darkblue;
+			height:100px;
+			padding:10px;
+	  	}
+	</style>
+</head>
+<body>
+    <div id="Content1">
+	  	这里的内容可显示或隐藏
+	</div>
+
+	<div id="collapseDiv">
+	  	单击这里
+	</div>
+
+    <div id = "Content2">
+	  	其他内容
+	</div>
+</body>
+<script type="text/javascript">
+	var Content1=document.getElementById("Content1");
+	var collapseDiv =document.getElementById("collapseDiv");
+	collapseDiv.onclick=function(){
+		if(Content1.style.display =="none"){
+			Content1.style.display="block";
+		}
+		else{
+			Content1.style.display ="none";
+		}
+	}
+</script>
+</html>

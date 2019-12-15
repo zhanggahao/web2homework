@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>获取非行内样式</title>
+	<style>
+		ul{
+			padding: 50px;
+    		margin: 50px;
+    		list-style-type: none;
+		}
+		li:before{
+			content: "△";
+		}
+		li:after{
+		    content: "(仅用于测试，请勿用于商业用途。)";
+		    font-size:12px;
+		    color:red;
+		}
+	</style>		
+</head>
+<body>
+	<ul>
+		<li><a href="#">我和我的祖国</a></li>
+		<li><a href="#">攀登者</a></li>
+		<li><a href="#">中国机长</a></li>
+	</ul>
+</body>
+<script>
+	//兼容写法
+	function getStyle(obj,style) {  
+		if(obj.currentStyle) 
+		{  
+		    return obj.currentStyle[style];  
+		} 
+		else 
+		{  
+		    return getComputedStyle(obj)[style];  
+		}  
+	}
+	var ul1=document. getElementsByTagName("ul")[0];
+	
+	console.log(getStyle(ul1,"padding"));
+
+	//获得伪元素的属性
+	console.log(getComputedStyle(ul1.firstElementChild,"after").color);//这时候伪类就不用写冒号
+</script>
+</html>

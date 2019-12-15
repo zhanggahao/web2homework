@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="lunbotu.css">
+	<script src="animates.js"></script>
+</head>
+<body>
+	<div class="biggest">
+	<div class="box1">
+		<img src="a15.png" class="image">
+		<div class="boxp">
+			<p class="pra" id="p1">[温馨提示]最近有不少人不法分子在网上骗人，请大家注意！！
+			</p>
+		</div>
+		
+	</div>
+	<div class="box" id="box">
+		<div class="slider"  id="slider">
+			<div class="slide"><img src="b5.png"></div>
+			<div class="slide"><img src="b1.png"></div>
+			<div class="slide"><img src="b2.png"></div>
+			<div class="slide"><img src="b3.png"></div>
+			<div class="slide"><img src="b4.png"></div>
+			<div class="slide"><img src="b5.png"></div>
+			<div class="slide"><img src="b1.png"></div>
+		</div>
+		<ul class="nav" id="nav">
+			<li class="active">1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+		<span id="left"><</span>
+		<span id="right">></span>
+	</div>
+	</div>
+	
+</body>
+
+<script type="text/javascript">
+	var box=document.getElementById("box");
+	var oNavlist=document.getElementById("nav").children;
+	var slider=document.getElementById("slider");
+	var left=document.getElementById("left");
+	var right=document.getElementById("right");
+	var index=1;
+	var timer;
+	var isMoving=false;
+	var p1=document.getElementById("p1");
+	window.onload=function(){
+		var time=setInterval(function(){
+			var now=parseInt(getStyle(p1,"left"));
+			console.log(now);
+			if(now===-800){
+				p1.style.left=850+"px";
+			}
+			else{
+				p1.style.left=now-1+"px";
+			}
+			},15);
+	}
+	function getStyle(obj,attr){
+		if(obj.currentStyle){
+			return obj.currentStyle[attr];
+		}
+		else{
+			return getComputedStyle(obj,null)[attr];
+		}
+	}
+	//轮播下一张的函数
+	function next(){
+		if(!isMoving){
+			isMoving=true;
+			index++;
+			navChange();
+			animate(slider,{left:-1200*index},function(){
+				if(index===6){
+					slider.style.left="-1200px";
+					index=1;
+				}
+				isMoving=false;
+			});
+		}
+		
+		
+	}
+	function pref(){
+		if(!isMoving){
+			isMoving=true;
+			index--;
+			navChange();
+			animate(slider,{left:-1200*index},function(){
+				if(index==0){
+					slider.style.left="-6000px";
+					index=5;
+				}
+				isMoving=false;
+			});
+		}
+	}
+	var timer=setInterval(next,2000);
+
+	//箭头的划入清定时器
+	box.onmouseover=function(){
+		animate(left,{opacity:50});
+		animate(right,{opacity:50});
+		clearInterval(timer);
+	}
+
+	//箭头的划出开定时器
+	box.onmouseout=function(){
+		animate(left,{opacity:0});
+		animate(right,{opacity:0});
+		timer=setInterval(next,2000);
+	}
+	right.onclick=next;
+	left.onclick=pref;
+	//小按钮点击事件
+	for(var i=0;i<oNavlist.length;i++){
+		oNavlist[i].idx=i;
+		oNavlist[i].onclick=function(){
+			index=this.idx+1;
+			navChange();
+			animate(slider,{left:-1200*index});
+		}
+	}
+	//小按钮背景色切换
+	function navChange(){
+		for(var i=0;i<oNavlist.length;i++){
+			oNavlist[i].className="";
+		}
+		if(index>5){
+			oNavlist[0].className='active';
+		}else if(index<=0){
+			oNavlist[4].className='active';
+		}else{
+			oNavlist[index-1].className='active';
+		}
+	}
+</script>
+</html>
